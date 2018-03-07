@@ -1,0 +1,20 @@
+- name: Enable repository for Ansible
+  copy:
+    src: ansible-ubuntu-ansible-xenial.list
+    dest: /etc/apt/sources.list.d/ansible-ubuntu-ansible-xenial.list
+    owner: root
+    group: root
+  become: true
+  
+- name: Add key for the Ansible repository
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 93C4A3FD7BB9C367
+  become: true
+  
+- name: Update Ansible
+  apt:
+    name: ansible
+    state: latest
+    update_cache: yes
+  become: true
