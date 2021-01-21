@@ -18,3 +18,11 @@
     state: latest
     update_cache: yes
   become: true
+
+- name: Enable SSH agent forwarding for Ansible
+  ini_file:
+    path: /etc/ansible/ansible.cfg
+    section: ssh_connection
+    option: ssh_args
+    value: -C -o ControlMaster=auto -o ControlPersist=60s -o ForwardAgent=yes
+  become: true
